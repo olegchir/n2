@@ -1,7 +1,29 @@
-doctype html
 html
   head
     title= title
+    base(href='/')
+    // Using tutorial:
+    // http://blog.edenmsg.com/angular2-typescript-gulp-and-expressjs/ 
+    // 1. Load libraries
+    script(src='libs/angular2/bundles/angular2-polyfills.js')
+    script(src='libs/systemjs/dist/system.src.js')
+    script(src='libs/rxjs/bundles/Rx.js')
+    script(src='libs/angular2/bundles/angular2.dev.js')
+    script(src='libs/angular2/bundles/router.dev.js')
+    // 2. Configure SystemJS
+    script.
+      System.config({
+        packages: {        
+          app: {
+            format: 'register',
+            defaultExtension: 'js'
+          }
+        }
+      });
+      System.import('app/bootstrap')
+            .then(null, console.error.bind(console));
+    // 3. Apply CSS
     link(rel='stylesheet', href='/stylesheets/style.css')
+  // 3. Display the application
   body
     block content

@@ -5,6 +5,7 @@ import {join} from 'path';
 import index from './routes/index';
 import users from './routes/users';
 import cookieParser = require('cookie-parser'); // this module doesn't use the ES6 default export yet
+import path = require('path');
 
 const app: express.Express = express();
 
@@ -19,6 +20,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(join(__dirname, 'public')));
+
+app.use('/app', express.static(path.resolve(__dirname, 'app')));
+app.use('/libs', express.static(path.resolve(__dirname, 'libs')));
 
 app.use('/', index);
 app.use('/users', users);
